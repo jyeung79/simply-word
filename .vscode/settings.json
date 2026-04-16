@@ -36,5 +36,6 @@
   ],
   "tailwindCSS.classFunctions": [
     "useResolveClassNames"
-  ]
+  ],
+  "css.lint.unknownAtRules": "ignore"
 }

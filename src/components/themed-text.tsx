@@ -71,3 +71,14 @@ const styles = StyleSheet.create({
     fontSize: 12,
   },
 });
+
+const typography = {
+  small: "text-sm font-normal leading-5",
+  smallBold: "text-sm font-bold leading-5",
+  default: "text-md font-normal leading-6",
+  title: "text-4xl font-semibold leading-13",
+  subtitle: "text-2xl font-semibold leading-11",
+  link: "text-sm leading-5",
+  linkPrimary: "text-sm leading-5 text-blue-500",
+  code: "text-xs font-mono font-semibold",
+};
