@@ -2,16 +2,16 @@
 @import 'uniwind';
 
 @theme {
-    --font-display:
-        -apple-system, BlinkMacSystemFont, 'Inter', ui-sans-serif, system-ui, sans-serif, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol, Noto Color Emoji;
-    --font-mono:
-        ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, Liberation Mono, Courier New, monospace;
+    /* Web font stacks — native platforms override via @layer theme below */
+    --font-display: -apple-system, 'San Francisco', Inter, ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+    --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace;
     --font-rounded: 'SF Pro Rounded', 'Hiragino Maru Gothic ProN', Meiryo, 'MS PGothic', sans-serif;
-    --font-serif: 'New York', ui-serif, 'Source Serif 4', Georgia, 'Times New Roman', serif;
+    --font-serif: -apple-system, 'New York', 'Source Serif 4', Georgia, 'Times New Roman', serif;
 
     /* Colors themes */
     --color-sepia: #F8F4E8;
     --color-sepia-text: #5A5343;
+    --color-sepia-verse-number: #8B7355;
     --color-sepia-highlight: #D4B483;
     --color-gentle-dark: #1A1A1A;
     /*OR #2B2B2B*/
