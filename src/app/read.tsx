@@ -4,7 +4,7 @@ import { Ionicons } from "@expo/vector-icons";
 import { FlashList } from "@shopify/flash-list";
 import { LinearGradient } from "expo-linear-gradient";
 import { useFocusEffect, useRouter } from "expo-router";
-import { useCallback, useRef } from "react";
+import { useCallback } from "react";
 import {
   Text,
   TouchableOpacity,
@@ -101,7 +101,6 @@ export default function ReadScreen() {
     ([verseNumber, verse]) => ({ verseNumber, verse }),
   );
 
-  const lastOffsetY = useRef(0);
   const insets = useSafeAreaInsets();
   const { height: screenHeight } = useWindowDimensions();
 
@@ -116,6 +115,7 @@ export default function ReadScreen() {
   );
 
   const isHidden = useSharedValue(false);
+  const lastOffsetY = useSharedValue(0);
 
   const tapGesture = Gesture.Tap()
     .maxDuration(150)
@@ -147,13 +147,13 @@ export default function ReadScreen() {
 
   const onScrollHandler = useAnimatedScrollHandler((event) => {
     const y = event.contentOffset.y;
-    const diff = y - lastOffsetY.current;
+    const diff = y - lastOffsetY.value;
     const isScrollingDown = diff > 0;
     const isScrollingUp = diff < 0;
 
     if (isScrollingDown && diff > 5 && !isHidden.value) isHidden.value = true;
     if (isScrollingUp && diff < -12 && isHidden.value) isHidden.value = false;
-    lastOffsetY.current = y;
+    lastOffsetY.value = y;
   });
 
   return (
