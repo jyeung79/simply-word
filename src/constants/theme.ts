@@ -3,24 +3,24 @@
  * There are many other ways to style your app. For example, [Nativewind](https://www.nativewind.dev/), [Tamagui](https://tamagui.dev/), [unistyles](https://reactnativeunistyles.vercel.app), etc.
  */
 
-import '@/global.css';
+import "@/global.css";
 
-import { Platform } from 'react-native';
+import { Platform } from "react-native";
 
 export const Colors = {
   light: {
-    text: '#000000',
-    background: '#ffffff',
-    backgroundElement: '#F0F0F3',
-    backgroundSelected: '#E0E1E6',
-    textSecondary: '#60646C',
+    text: "#000000",
+    background: "#ffffff",
+    backgroundElement: "#F0F0F3",
+    backgroundSelected: "#E0E1E6",
+    textSecondary: "#60646C",
   },
   dark: {
-    text: '#ffffff',
-    background: '#000000',
-    backgroundElement: '#212225',
-    backgroundSelected: '#2E3135',
-    textSecondary: '#B0B4BA',
+    text: "#ffffff",
+    background: "#000000",
+    backgroundElement: "#212225",
+    backgroundSelected: "#2E3135",
+    textSecondary: "#B0B4BA",
   },
 } as const;
 
@@ -28,22 +28,23 @@ export type ThemeColor = keyof typeof Colors.light & keyof typeof Colors.dark;
 
 export const Fonts = Platform.select({
   ios: {
-    sans: 'system-ui',
-    serif: 'ui-serif',
-    rounded: 'ui-rounded',
-    mono: 'ui-monospace',
+    sans: "system-ui",
+    serif: "ui-serif",
+    rounded: "ui-rounded",
+    mono: "ui-monospace",
   },
   default: {
-    sans: 'normal',
-    serif: 'Source Serif 4',
-    rounded: 'normal',
-    mono: 'monospace',
+    sans: "normal",
+    serif: "Source Serif 4",
+    rounded: "normal",
+    mono: "monospace",
   },
   web: {
-    sans: 'Spline Sans, Inter, ui-sans-serif, system-ui, sans-serif, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol, Noto Color Emoji',
-    serif: 'Source Serif 4, Georgia, Times New Roman, serif',
-    rounded: 'SF Pro Rounded, Hiragino Maru Gothic ProN, Meiryo, MS PGothic, sans-serif',
-    mono: 'ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, Liberation Mono, Courier New, monospace',
+    sans: "Spline Sans, Inter, ui-sans-serif, system-ui, sans-serif, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol, Noto Color Emoji",
+    serif: "Source Serif 4, Georgia, Times New Roman, serif",
+    rounded:
+      "SF Pro Rounded, Hiragino Maru Gothic ProN, Meiryo, MS PGothic, sans-serif",
+    mono: "ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, Liberation Mono, Courier New, monospace",
   },
 });
 

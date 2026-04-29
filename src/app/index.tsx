@@ -1,12 +1,11 @@
-import { StyleSheet } from 'react-native';
-import { SafeAreaView } from 'react-native-safe-area-context';
+import { StyleSheet } from "react-native";
+import { SafeAreaView } from "react-native-safe-area-context";
 
-import { AnimatedIcon } from '@/components/animated-icon';
-import { HintRow } from '@/components/hint-row';
-import { ThemedText } from '@/components/themed-text';
-import { ThemedView } from '@/components/themed-view';
-import { BottomTabInset, MaxContentWidth, Spacing } from '@/constants/theme';
-
+import { AnimatedIcon } from "@/components/animated-icon";
+import { HintRow } from "@/components/hint-row";
+import { ThemedText } from "@/components/themed-text";
+import { ThemedView } from "@/components/themed-view";
+import { BottomTabInset, MaxContentWidth, Spacing } from "@/constants/theme";
 
 export default function HomeScreen() {
   return (
@@ -41,33 +40,33 @@ export default function HomeScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
-    flexDirection: 'row',
+    justifyContent: "center",
+    flexDirection: "row",
   },
   safeArea: {
     flex: 1,
     paddingHorizontal: Spacing.four,
-    alignItems: 'center',
+    alignItems: "center",
     gap: Spacing.three,
     paddingBottom: BottomTabInset + Spacing.three,
     maxWidth: MaxContentWidth,
   },
   heroSection: {
-    alignItems: 'center',
-    justifyContent: 'center',
+    alignItems: "center",
+    justifyContent: "center",
     flex: 1,
     paddingHorizontal: Spacing.four,
     gap: Spacing.four,
   },
   title: {
-    textAlign: 'center',
+    textAlign: "center",
   },
   code: {
-    textTransform: 'uppercase',
+    textTransform: "uppercase",
   },
   stepContainer: {
     gap: Spacing.three,
-    alignSelf: 'stretch',
+    alignSelf: "stretch",
     paddingHorizontal: Spacing.three,
     paddingVertical: Spacing.four,
     borderRadius: Spacing.four,
