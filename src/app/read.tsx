@@ -44,7 +44,7 @@ export default function ReadScreen() {
 
   const passageContent: PassageContentItem[] = useMemo(
     () =>
-      Object.entries(bookOfBible[book][chapter.toString()]).map(
+      Object.entries(bookOfBible[book]?.[chapter.toString()] ?? {}).map(
         ([verseNumber, verse]) => ({ verseNumber, verse }),
       ),
     [book, chapter],

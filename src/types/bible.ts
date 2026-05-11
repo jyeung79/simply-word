@@ -17,7 +17,7 @@ export type BibleBookNames =
   | "Nehemiah"
   | "Esther"
   | "Job"
-  | "Psalm"
+  | "Psalms"
   | "Proverbs"
   | "Ecclesiastes"
   | "Song Of Solomon"

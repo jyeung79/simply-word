@@ -29,7 +29,7 @@ export const BOOKS: BookMeta[] = [
   { name: "Nehemiah", testament: "old", category: "History" },
   { name: "Esther", testament: "old", category: "History" },
   { name: "Job", testament: "old", category: "Poetry" },
-  { name: "Psalm", testament: "old", category: "Poetry" },
+  { name: "Psalms", testament: "old", category: "Poetry" },
   { name: "Proverbs", testament: "old", category: "Poetry" },
   { name: "Ecclesiastes", testament: "old", category: "Poetry" },
   { name: "Song Of Solomon", testament: "old", category: "Poetry" },
