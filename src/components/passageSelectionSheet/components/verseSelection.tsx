@@ -24,7 +24,7 @@ const NumberTile = ({
   </Pressable>
 );
 
-export const VerseSelectionView = () => {
+const VerseSelectionView = () => {
   const draftBook = useVerseSelection((s) => s.draftBook);
   const draftChapter = useVerseSelection((s) => s.draftChapter);
   const selectVerse = useVerseSelection((s) => s.selectVerse);
@@ -47,3 +47,5 @@ export const VerseSelectionView = () => {
     </ScrollView>
   );
 };
+
+export { VerseSelectionView };

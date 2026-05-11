@@ -1,32 +1,35 @@
-import { useBottomSheet } from "@/hooks/store/useBottomSheet";
-import { useVerseSelection } from "@/hooks/store/useVerseSelection";
+import { PASSAGE_SELECTION_SHEET } from "@/constants/sheetNames";
+import {
+  SelectionStep,
+  useVerseSelection,
+} from "@/hooks/store/useVerseSelection";
 import { Ionicons } from "@expo/vector-icons";
+import { TrueSheet } from "@lodev09/react-native-true-sheet";
 import { Pressable, Text, View } from "react-native";
 
 export const PassageSelectionHeader = () => {
   const { step, draftBook, draftChapter, goToStep } = useVerseSelection();
-  const { collapseSheet } = useBottomSheet();
 
   const onBack = () => {
-    if (step === "chapter") goToStep("book");
-    else if (step === "verse") goToStep("chapter");
+    if (step === SelectionStep.CHAPTER) goToStep(SelectionStep.BOOK);
+    else if (step === SelectionStep.VERSE) goToStep(SelectionStep.CHAPTER);
   };
 
   const title =
-    step === "book"
+    step === SelectionStep.BOOK
       ? "Your Bookshelf"
-      : step === "chapter"
+      : step === SelectionStep.CHAPTER
         ? (draftBook ?? "")
         : `${draftBook ?? ""} ${draftChapter ?? ""}`;
 
   const subtitle =
-    step === "book"
+    step === SelectionStep.BOOK
       ? "66 BOOKS"
-      : step === "chapter"
+      : step === SelectionStep.CHAPTER
         ? "SELECT CHAPTER"
         : "SELECT VERSE";
 
-  const showBack = step !== "book";
+  const showBack = step !== SelectionStep.BOOK;
 
   return (
     <View className="flex-row items-center justify-between px-6 pt-6 pb-4">
@@ -51,7 +54,7 @@ export const PassageSelectionHeader = () => {
         </Text>
       </View>
       <Pressable
-        onPress={collapseSheet}
+        onPress={() => TrueSheet.dismiss(PASSAGE_SELECTION_SHEET)}
         hitSlop={12}
         className="w-10 h-10 rounded-full bg-white/10 items-center justify-center ml-3"
       >

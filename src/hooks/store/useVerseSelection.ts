@@ -1,9 +1,14 @@
-import { useBottomSheet } from "@/hooks/store/useBottomSheet";
+import { PASSAGE_SELECTION_SHEET } from "@/constants/sheetNames";
 import { useCurrentPassage } from "@/hooks/store/useCurrentPassage";
 import type { BibleBookNames } from "@/types/bible";
+import { TrueSheet } from "@lodev09/react-native-true-sheet";
 import { create } from "zustand";
 
-export type SelectionStep = "book" | "chapter" | "verse";
+export enum SelectionStep {
+  BOOK = "book",
+  CHAPTER = "chapter",
+  VERSE = "verse",
+}
 
 interface VerseSelectionStore {
   step: SelectionStep;
@@ -19,7 +24,7 @@ interface VerseSelectionStore {
 }
 
 const INITIAL_STATE = {
-  step: "book" as const,
+  step: SelectionStep.BOOK,
   draftBook: null,
   draftChapter: null,
   draftVerse: null,
@@ -33,11 +38,15 @@ export const useVerseSelection = create<VerseSelectionStore>((set, get) => ({
       draftBook: book,
       draftChapter: null,
       draftVerse: null,
-      step: "chapter",
+      step: SelectionStep.CHAPTER,
     }),
 
   selectChapter: (chapter) =>
-    set({ draftChapter: chapter, draftVerse: null, step: "verse" }),
+    set({
+      draftChapter: chapter,
+      draftVerse: null,
+      step: SelectionStep.VERSE,
+    }),
 
   selectVerse: (verse) => {
     const { draftBook, draftChapter } = get();
@@ -48,7 +57,7 @@ export const useVerseSelection = create<VerseSelectionStore>((set, get) => ({
       chapter: draftChapter,
       verse,
     });
-    useBottomSheet.getState().collapseSheet();
+    TrueSheet.dismiss(PASSAGE_SELECTION_SHEET);
   },
 
   goToStep: (step) => set({ step }),

@@ -1,10 +1,11 @@
-import PassageSelectionSheet from "@/components/passageSelectionSheet";
+import { PassageSelectionSheet } from "@/components/passageSelectionSheet";
+import { PASSAGE_SELECTION_SHEET } from "@/constants/sheetNames";
 import ESV_BIBLE from "@/constants/translations/esv_bible.json";
-import { useBottomSheet } from "@/hooks/store/useBottomSheet";
 import { useCurrentPassage } from "@/hooks/store/useCurrentPassage";
 import { useTabbar } from "@/hooks/store/useTabbar";
 import { BibleBookNames } from "@/types/bible";
 import { Ionicons } from "@expo/vector-icons";
+import { TrueSheet } from "@lodev09/react-native-true-sheet";
 import { FlashList } from "@shopify/flash-list";
 import { LinearGradient } from "expo-linear-gradient";
 import { useFocusEffect, useRouter } from "expo-router";
@@ -53,7 +54,6 @@ export default function ReadScreen() {
   const { height: screenHeight } = useWindowDimensions();
 
   const { setMinimized } = useTabbar();
-  const { expanded, expandSheet, collapseSheet } = useBottomSheet();
   const router = useRouter();
 
   useFocusEffect(
@@ -109,20 +109,20 @@ export default function ReadScreen() {
     <View className="flex-1 bg-sepia">
       {/* Top Bar */}
       <Animated.View
-        className="flex-row items-end justify-between px-6 pb-4 absolute top-0 z-50 bg-gentle-dark/80 backdrop-blur-md w-full min-h-28"
+        className="flex-row items-end justify-center px-6 pb-4 absolute top-0 z-50 bg-gentle-dark/80 backdrop-blur-md w-full min-h-28"
         style={headerAnimStyle}
       >
         <TouchableOpacity
           onPress={() => {
             router.back();
           }}
+          className="absolute left-4 bottom-4"
         >
           <Ionicons name="chevron-back-outline" size={28} color="white" />
         </TouchableOpacity>
         <Text className="text-white font-semibold text-lg tracking-wide font-display">
-          {"Genesis 1"}
+          {`${book} ${chapter}`}
         </Text>
-        <View style={{ width: 28 }} />
       </Animated.View>
 
       {/* Will monitor if tapGesture affects scrolling gestures - update: it does not at the moment 
@@ -183,12 +183,11 @@ export default function ReadScreen() {
 
       {/* HIDE for now - Bottom Player */}
       <Animated.View
-        className="absolute bottom-0 px-6 pb-8 pt-4 font-serif bg-gentle-dark/80 text-white backdrop-blur-md rounded-3xl w-full"
+        className="absolute bottom-0 px-6 pb-8 pt-4 font-serif bg-gentle-dark/80 text-white backdrop-blur-md w-full"
         style={footerAnimStyle}
       >
         {/* Progress Row */}
-        <View className="flex-row items-center mb-8">
-          {/* Play Button */}
+        {/* <View className="flex-row items-center mb-8">
           <TouchableOpacity className="w-12 h-12 bg-[#f0f3f4] rounded-full justify-center items-center shadow-sm mr-4">
             <Ionicons
               name="play"
@@ -197,8 +196,6 @@ export default function ReadScreen() {
               style={{ marginLeft: 4 }}
             />
           </TouchableOpacity>
-
-          {/* Progress Bar & Time */}
           <View className="flex-1">
             <View className="h-1 bg-white/30 rounded-full flex-row items-center w-full mb-2 relative">
               <View className="h-full w-0 bg-white rounded-full">
@@ -210,7 +207,7 @@ export default function ReadScreen() {
               <Text className="text-white font-medium text-sm">-05:28</Text>
             </View>
           </View>
-        </View>
+        </View> */}
 
         {/* Bottom Controls Row*/}
         <View className="flex-row items-center justify-between">
@@ -220,11 +217,11 @@ export default function ReadScreen() {
 
           <TouchableOpacity
             onPress={() => {
-              expandSheet();
+              TrueSheet.present(PASSAGE_SELECTION_SHEET);
             }}
           >
             <Text className="text-white font-semibold text-base font-display">
-              Open Verse Selector
+              {"Select Passage"}
             </Text>
           </TouchableOpacity>
 
