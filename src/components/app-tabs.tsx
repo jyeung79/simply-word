@@ -8,14 +8,14 @@ import { useTabbar } from "@/hooks/store/useTabbar";
 export default function AppTabs() {
   const scheme = useColorScheme();
   const colors = Colors[scheme === "unspecified" ? "light" : scheme];
-  const { isMinized } = useTabbar();
+  const { minimized } = useTabbar();
 
   return (
     <NativeTabs
       backgroundColor={colors.background}
       indicatorColor={colors.backgroundElement}
       labelStyle={{ selected: { color: colors.text } }}
-      hidden={isMinized}
+      hidden={minimized}
     >
       <NativeTabs.Trigger name="index">
         <NativeTabs.Trigger.Label>Home</NativeTabs.Trigger.Label>
@@ -28,7 +28,11 @@ export default function AppTabs() {
       <NativeTabs.Trigger name="explore">
         <NativeTabs.Trigger.Label>Explore</NativeTabs.Trigger.Label>
         <NativeTabs.Trigger.Icon
-          src={require("@/assets/images/tabIcons/explore.png")}
+          sf={{
+            default: "rectangle.on.rectangle.circle",
+            selected: "rectangle.on.rectangle.circle.fill",
+          }}
+          md="search"
           renderingMode="template"
         />
       </NativeTabs.Trigger>

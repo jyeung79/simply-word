@@ -1,10 +1,15 @@
+import { PassageSelectionSheet } from "@/components/passageSelectionSheet";
+import { PASSAGE_SELECTION_SHEET } from "@/constants/sheetNames";
 import ESV_BIBLE from "@/constants/translations/esv_bible.json";
+import { useCurrentPassage } from "@/hooks/store/useCurrentPassage";
 import { useTabbar } from "@/hooks/store/useTabbar";
+import { BibleBookNames } from "@/types/bible";
 import { Ionicons } from "@expo/vector-icons";
+import { TrueSheet } from "@lodev09/react-native-true-sheet";
 import { FlashList } from "@shopify/flash-list";
 import { LinearGradient } from "expo-linear-gradient";
 import { useFocusEffect, useRouter } from "expo-router";
-import { useCallback } from "react";
+import { useCallback, useMemo } from "react";
 import {
   Text,
   TouchableOpacity,
@@ -20,97 +25,41 @@ import Animated, {
 } from "react-native-reanimated";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 
-type BibleBookNames =
-  | "Genesis"
-  | "Exodus"
-  | "Leviticus"
-  | "Numbers"
-  | "Deuteronomy"
-  | "Joshua"
-  | "Judges"
-  | "Ruth"
-  | "1 Samuel"
-  | "2 Samuel"
-  | "1 Kings"
-  | "2 Kings"
-  | "1 Chronicles"
-  | "2 Chronicles"
-  | "Ezra"
-  | "Nehemiah"
-  | "Esther"
-  | "Job"
-  | "Psalms"
-  | "Proverbs"
-  | "Ecclesiastes"
-  | "Song of Solomon"
-  | "Isaiah"
-  | "Jeremiah"
-  | "Lamentations"
-  | "Ezekiel"
-  | "Daniel"
-  | "Hosea"
-  | "Joel"
-  | "Amos"
-  | "Obadiah"
-  | "Jonah"
-  | "Micah"
-  | "Nahum"
-  | "Habakkuk"
-  | "Zephaniah"
-  | "Haggai"
-  | "Zechariah"
-  | "Malachi"
-  | "Matthew"
-  | "Mark"
-  | "Luke"
-  | "John"
-  | "Acts"
-  | "Romans"
-  | "1 Corinthians"
-  | "2 Corinthians"
-  | "Galatians"
-  | "Ephesians"
-  | "Philippians"
-  | "Colossians"
-  | "1 Thessalonians"
-  | "2 Thessalonians"
-  | "1 Timothy"
-  | "2 Timothy"
-  | "Titus"
-  | "Philemon"
-  | "Hebrews"
-  | "James"
-  | "1 Peter"
-  | "2 Peter"
-  | "1 John"
-  | "2 John"
-  | "3 John"
-  | "Jude"
-  | "Revelation";
-
 interface BookOfBible {
   [chaperId: string]: {
     [verseNumber: string]: string;
   };
 }
 
+interface PassageContentItem {
+  verseNumber: string;
+  verse: string;
+}
+
 export default function ReadScreen() {
+  const {
+    passage: { book, chapter, verse },
+  } = useCurrentPassage();
   const bookOfBible: Record<BibleBookNames, BookOfBible> = ESV_BIBLE;
-  // Just grab chapter 1 verses to display a continuous text
-  const chapter1 = Object.entries(bookOfBible["Genesis"]["1"]).map(
-    ([verseNumber, verse]) => ({ verseNumber, verse }),
+
+  const passageContent: PassageContentItem[] = useMemo(
+    () =>
+      Object.entries(bookOfBible[book]?.[chapter.toString()] ?? {})
+        .map(([verseNumber, verse]) => ({ verseNumber, verse }))
+        .sort((a, b) => parseInt(a.verseNumber) - parseInt(b.verseNumber)),
+    [book, chapter],
   );
 
   const insets = useSafeAreaInsets();
   const { height: screenHeight } = useWindowDimensions();
 
-  const { setIsMinized } = useTabbar();
+  const { setMinimized } = useTabbar();
   const router = useRouter();
 
   useFocusEffect(
     useCallback(() => {
-      setIsMinized(true);
-      return () => setIsMinized(false);
+      setMinimized(true);
+      return () => setMinimized(false);
     }, []),
   );
 
@@ -160,20 +109,20 @@ export default function ReadScreen() {
     <View className="flex-1 bg-sepia">
       {/* Top Bar */}
       <Animated.View
-        className="flex-row items-end justify-between px-6 pb-4 absolute top-0 z-50 bg-gentle-dark/80 backdrop-blur-md w-full min-h-28"
+        className="flex-row items-end justify-center px-6 pb-4 absolute top-0 z-50 bg-gentle-dark/80 backdrop-blur-md w-full min-h-28"
         style={headerAnimStyle}
       >
         <TouchableOpacity
           onPress={() => {
             router.back();
           }}
+          className="absolute left-4 bottom-4"
         >
           <Ionicons name="chevron-back-outline" size={28} color="white" />
         </TouchableOpacity>
         <Text className="text-white font-semibold text-lg tracking-wide font-display">
-          {"Genesis 1"}
+          {`${book} ${chapter}`}
         </Text>
-        <View style={{ width: 28 }} />
       </Animated.View>
 
       {/* Will monitor if tapGesture affects scrolling gestures - update: it does not at the moment 
@@ -181,7 +130,7 @@ export default function ReadScreen() {
       */}
       <GestureDetector gesture={tapGesture}>
         <AnimatedFlashList
-          data={chapter1}
+          data={passageContent}
           onScroll={onScrollHandler}
           scrollEventThrottle={16}
           showsVerticalScrollIndicator={false}
@@ -190,7 +139,7 @@ export default function ReadScreen() {
           ListHeaderComponent={() => (
             <View className="py-4 items-center">
               <Text className="text-sepia-text text-4xl font-bold tracking-wide font-display">
-                Genesis 1
+                {book} {chapter}
               </Text>
             </View>
           )}
@@ -234,12 +183,11 @@ export default function ReadScreen() {
 
       {/* HIDE for now - Bottom Player */}
       <Animated.View
-        className="absolute bottom-0 px-6 pb-8 pt-4 font-serif bg-gentle-dark/80 text-white backdrop-blur-md rounded-3xl w-full"
+        className="absolute bottom-0 px-6 pb-8 pt-4 font-serif bg-gentle-dark/80 text-white backdrop-blur-md w-full"
         style={footerAnimStyle}
       >
         {/* Progress Row */}
-        <View className="flex-row items-center mb-8">
-          {/* Play Button */}
+        {/* <View className="flex-row items-center mb-8">
           <TouchableOpacity className="w-12 h-12 bg-[#f0f3f4] rounded-full justify-center items-center shadow-sm mr-4">
             <Ionicons
               name="play"
@@ -248,8 +196,6 @@ export default function ReadScreen() {
               style={{ marginLeft: 4 }}
             />
           </TouchableOpacity>
-
-          {/* Progress Bar & Time */}
           <View className="flex-1">
             <View className="h-1 bg-white/30 rounded-full flex-row items-center w-full mb-2 relative">
               <View className="h-full w-0 bg-white rounded-full">
@@ -261,7 +207,7 @@ export default function ReadScreen() {
               <Text className="text-white font-medium text-sm">-05:28</Text>
             </View>
           </View>
-        </View>
+        </View> */}
 
         {/* Bottom Controls Row*/}
         <View className="flex-row items-center justify-between">
@@ -269,9 +215,13 @@ export default function ReadScreen() {
             <Ionicons name="list-outline" size={28} color="white" />
           </TouchableOpacity>
 
-          <TouchableOpacity>
+          <TouchableOpacity
+            onPress={() => {
+              TrueSheet.present(PASSAGE_SELECTION_SHEET);
+            }}
+          >
             <Text className="text-white font-semibold text-base font-display">
-              Skip
+              {"Select Passage"}
             </Text>
           </TouchableOpacity>
 
@@ -282,6 +232,7 @@ export default function ReadScreen() {
           </TouchableOpacity>
         </View>
       </Animated.View>
+      <PassageSelectionSheet />
     </View>
   );
 }
