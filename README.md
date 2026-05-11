@@ -59,4 +59,4 @@ Join our community of developers creating universal apps.
 
 Copyright (C) 2026 Jeffery Yeung
 
-This software is licensed under the GNU General Public License v3.0.
+This software is licensed under the GNU General Public License v3.0 or later](https://www.gnu.org/licenses/gpl-3.0.html).
