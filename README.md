@@ -54,3 +54,9 @@ Join our community of developers creating universal apps.
 
 - [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
 - [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+
+## License
+
+Copyright (C) 2026 Jeffery Yeung
+
+This software is licensed under the GNU General Public License v3.0 or later](https://www.gnu.org/licenses/gpl-3.0.html).
