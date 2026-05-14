@@ -1,4 +1,3 @@
-import { AnimatedSplashOverlay } from "@/components/animated-icon";
 import AppTabs from "@/components/app-tabs";
 import {
   DarkTheme,
@@ -20,7 +19,6 @@ export default function TabLayout() {
     <GestureHandlerRootView style={{ flex: 1 }}>
       <ThemeProvider value={colorScheme === "dark" ? DarkTheme : DefaultTheme}>
         <SafeAreaProvider initialMetrics={initialWindowMetrics}>
-          <AnimatedSplashOverlay />
           <AppTabs />
         </SafeAreaProvider>
       </ThemeProvider>

@@ -1,22 +1,24 @@
-import { StyleSheet } from "react-native";
+import { StyleSheet, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 import { AnimatedIcon } from "@/components/animated-icon";
+import { AuroraBackground } from "@/components/aurora-background";
 import { HintRow } from "@/components/hint-row";
 import { ThemedText } from "@/components/themed-text";
 import { ThemedView } from "@/components/themed-view";
 import { BottomTabInset, MaxContentWidth, Spacing } from "@/constants/theme";
 
-export default function HomeScreen() {
+export default function LandingScreen() {
   return (
-    <ThemedView style={styles.container}>
+    <View style={styles.container}>
+      <AuroraBackground />
       <SafeAreaView style={styles.safeArea}>
-        <ThemedView style={styles.heroSection}>
+        <View style={styles.heroSection}>
           <AnimatedIcon />
           <ThemedText type="title" style={styles.title}>
             Welcome to&nbsp;Expo
           </ThemedText>
-        </ThemedView>
+        </View>
 
         <ThemedText type="code" style={styles.code}>
           get started
@@ -33,7 +35,7 @@ export default function HomeScreen() {
           />
         </ThemedView>
       </SafeAreaView>
-    </ThemedView>
+    </View>
   );
 }
 
