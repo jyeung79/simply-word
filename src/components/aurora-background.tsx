@@ -3,12 +3,18 @@ import {
   Canvas,
   Circle,
   Fill,
+  useCanvasSize,
   useClock,
 } from "@shopify/react-native-skia";
-import { StyleSheet, useWindowDimensions } from "react-native";
+import { StyleSheet } from "react-native";
 import { useDerivedValue, type SharedValue } from "react-native-reanimated";
 
-const BASE_COLOR = "#1a1a2e";
+const SPACE_BLACK = "#05050a";
+const NEBULA_INDIGO = "#1a1a4a";
+const NEBULA_PURPLE = "#3a1255";
+const NEBULA_MAGENTA = "#5a1a44";
+const NEBULA_TEAL = "#0a2e3a";
+const NEBULA_VIOLET = "#241845";
 
 type Blob = {
   color: string;
@@ -20,41 +26,69 @@ type Blob = {
   ay: number;
   baseX: number;
   baseY: number;
+  opacity: number;
 };
 
 const BLOBS: Blob[] = [
   {
-    color: "#3a2d5c",
-    periodX: 14000,
-    periodY: 17000,
+    color: NEBULA_INDIGO,
+    periodX: 22000,
+    periodY: 27000,
     phaseX: 0,
     phaseY: 0.3,
-    ax: 0.35,
+    ax: 0.3,
     ay: 0.25,
     baseX: 0.3,
-    baseY: 0.3,
+    baseY: 0.35,
+    opacity: 0.55,
   },
   {
-    color: "#1e3a5f",
-    periodX: 19000,
-    periodY: 13000,
+    color: NEBULA_PURPLE,
+    periodX: 26000,
+    periodY: 19000,
     phaseX: 0.5,
     phaseY: 0.7,
-    ax: 0.3,
+    ax: 0.35,
     ay: 0.3,
     baseX: 0.7,
-    baseY: 0.4,
+    baseY: 0.55,
+    opacity: 0.5,
   },
   {
-    color: "#2d4a3e",
-    periodX: 16000,
-    periodY: 21000,
+    color: NEBULA_MAGENTA,
+    periodX: 31000,
+    periodY: 24000,
     phaseX: 0.2,
     phaseY: 0.9,
     ax: 0.4,
     ay: 0.35,
-    baseX: 0.5,
+    baseX: 0.55,
+    baseY: 0.75,
+    opacity: 0.4,
+  },
+  {
+    color: NEBULA_TEAL,
+    periodX: 29000,
+    periodY: 33000,
+    phaseX: 0.8,
+    phaseY: 0.2,
+    ax: 0.3,
+    ay: 0.3,
+    baseX: 0.2,
     baseY: 0.7,
+    opacity: 0.45,
+  },
+  {
+    color: NEBULA_VIOLET,
+    periodX: 35000,
+    periodY: 21000,
+    phaseX: 0.4,
+    phaseY: 0.6,
+    ax: 0.25,
+    ay: 0.2,
+    baseX: 0.8,
+    baseY: 0.2,
+    opacity: 0.5,
   },
 ];
 
@@ -83,20 +117,29 @@ function AuroraBlob({
   });
 
   return (
-    <Circle cx={cx} cy={cy} r={radius} color={blob.color} opacity={0.75}>
+    <Circle
+      cx={cx}
+      cy={cy}
+      r={radius}
+      color={blob.color}
+      opacity={blob.opacity}
+    >
       <BlurMask blur={80} style="normal" />
     </Circle>
   );
 }
 
 export function AuroraBackground() {
-  const { width, height } = useWindowDimensions();
+  const {
+    ref,
+    size: { width, height },
+  } = useCanvasSize();
   const clock = useClock();
   const radius = Math.max(width, height) * 0.45;
 
   return (
-    <Canvas style={StyleSheet.absoluteFill}>
-      <Fill color={BASE_COLOR} />
+    <Canvas style={StyleSheet.absoluteFill} ref={ref}>
+      <Fill color={SPACE_BLACK} />
       {BLOBS.map((blob, i) => (
         <AuroraBlob
           key={i}
