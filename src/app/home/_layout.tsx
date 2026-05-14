@@ -17,7 +17,7 @@ export default function AppTabs() {
       labelStyle={{ selected: { color: colors.text } }}
       hidden={minimized}
     >
-      <NativeTabs.Trigger name="index">
+      {/* <NativeTabs.Trigger name="index">
         <NativeTabs.Trigger.Label>Home</NativeTabs.Trigger.Label>
         <NativeTabs.Trigger.Icon
           src={require("@/assets/images/tabIcons/home.png")}
@@ -35,7 +35,7 @@ export default function AppTabs() {
           md="search"
           renderingMode="template"
         />
-      </NativeTabs.Trigger>
+      </NativeTabs.Trigger> */}
 
       <NativeTabs.Trigger name="read">
         <NativeTabs.Trigger.Label>Read</NativeTabs.Trigger.Label>

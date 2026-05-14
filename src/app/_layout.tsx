@@ -1,4 +1,4 @@
-import AppTabs from "@/components/app-tabs";
+import LandingScreen from "@/app/";
 import {
   DarkTheme,
   DefaultTheme,
@@ -19,7 +19,7 @@ export default function TabLayout() {
     <GestureHandlerRootView style={{ flex: 1 }}>
       <ThemeProvider value={colorScheme === "dark" ? DarkTheme : DefaultTheme}>
         <SafeAreaProvider initialMetrics={initialWindowMetrics}>
-          <AppTabs />
+          <LandingScreen />
         </SafeAreaProvider>
       </ThemeProvider>
     </GestureHandlerRootView>

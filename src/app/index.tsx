@@ -1,39 +1,35 @@
-import { StyleSheet, View } from "react-native";
+import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 import { AnimatedIcon } from "@/components/animated-icon";
 import { AuroraBackground } from "@/components/aurora-background";
-import { HintRow } from "@/components/hint-row";
-import { ThemedText } from "@/components/themed-text";
-import { ThemedView } from "@/components/themed-view";
 import { BottomTabInset, MaxContentWidth, Spacing } from "@/constants/theme";
+// import { useAuth } from "@/hooks/store/useAuth";
+import { useRouter } from "expo-router";
 
 export default function LandingScreen() {
+  // const { user, isLoaded } = useAuth();
+  const router = useRouter();
+
   return (
     <View style={styles.container}>
       <AuroraBackground />
       <SafeAreaView style={styles.safeArea}>
         <View style={styles.heroSection}>
           <AnimatedIcon />
-          <ThemedText type="title" style={styles.title}>
-            Welcome to&nbsp;Expo
-          </ThemedText>
+          <Text className="text-6xl font-serif text-sepia font-medium tracking-wide text-center">
+            {"Simply\nWord"}
+          </Text>
         </View>
 
-        <ThemedText type="code" style={styles.code}>
-          get started
-        </ThemedText>
-
-        <ThemedView type="backgroundElement" style={styles.stepContainer}>
-          <HintRow
-            title="Try editing"
-            hint={<ThemedText type="code">src/app/index.tsx</ThemedText>}
-          />
-          <HintRow
-            title="Fresh start"
-            hint={<ThemedText type="code">npm run reset-project</ThemedText>}
-          />
-        </ThemedView>
+        <TouchableOpacity
+          className="bg-sepia px-6 py-3 rounded-lg"
+          onPress={() => router.navigate("/home/read")}
+        >
+          <Text className="text-xl font-serif text-sepia-text font-medium tracking-wide text-center">
+            Get Started
+          </Text>
+        </TouchableOpacity>
       </SafeAreaView>
     </View>
   );
