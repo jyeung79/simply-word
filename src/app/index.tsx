@@ -15,21 +15,30 @@ export default function LandingScreen() {
     <View style={styles.container}>
       <AuroraBackground />
       <SafeAreaView style={styles.safeArea}>
-        <View style={styles.heroSection}>
+        <View className="flex justify-center items-center grow-4">
           <AnimatedIcon />
-          <Text className="text-6xl font-serif text-sepia font-medium tracking-wide text-center">
+          <Text className="text-6xl font-serif text-off-white font-medium tracking-wide text-center">
             {"Simply\nWord"}
           </Text>
         </View>
-
-        <TouchableOpacity
-          className="bg-sepia px-6 py-3 rounded-lg"
-          onPress={() => router.navigate("/home/read")}
-        >
-          <Text className="text-xl font-serif text-sepia-text font-medium tracking-wide text-center">
-            Get Started
+        <View className="flex justify-center items-center grow-1">
+          <Text className="text-lg font-serif italic text-off-white/70 font-medium tracking-wide text-center max-w-72">
+            {
+              "Reading the bible shouldn't be hard. Let's get focused on the word of God."
+            }
           </Text>
-        </TouchableOpacity>
+        </View>
+
+        <View className="flex justify-center items-center grow-1">
+          <TouchableOpacity
+            className="bg-sepia px-6 py-3 rounded-lg"
+            onPress={() => router.replace("/home")}
+          >
+            <Text className="text-xl font-serif text-sepia-text font-medium tracking-wide text-center">
+              Get Started
+            </Text>
+          </TouchableOpacity>
+        </View>
       </SafeAreaView>
     </View>
   );
