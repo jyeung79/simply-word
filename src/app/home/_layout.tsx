@@ -25,18 +25,6 @@ export default function AppTabs() {
         />
       </NativeTabs.Trigger>
 
-      <NativeTabs.Trigger name="explore">
-        <NativeTabs.Trigger.Label>Explore</NativeTabs.Trigger.Label>
-        <NativeTabs.Trigger.Icon
-          sf={{
-            default: "rectangle.on.rectangle.circle",
-            selected: "rectangle.on.rectangle.circle.fill",
-          }}
-          md="search"
-          renderingMode="template"
-        />
-      </NativeTabs.Trigger>
-
       <NativeTabs.Trigger name="read">
         <NativeTabs.Trigger.Label>Read</NativeTabs.Trigger.Label>
         <NativeTabs.Trigger.Icon

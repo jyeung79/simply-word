@@ -1,10 +1,9 @@
-import { AnimatedSplashOverlay } from "@/components/animated-icon";
-import AppTabs from "@/components/app-tabs";
 import {
   DarkTheme,
   DefaultTheme,
   ThemeProvider,
 } from "@react-navigation/native";
+import { Stack } from "expo-router";
 import React from "react";
 import { useColorScheme } from "react-native";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
@@ -20,8 +19,7 @@ export default function TabLayout() {
     <GestureHandlerRootView style={{ flex: 1 }}>
       <ThemeProvider value={colorScheme === "dark" ? DarkTheme : DefaultTheme}>
         <SafeAreaProvider initialMetrics={initialWindowMetrics}>
-          <AnimatedSplashOverlay />
-          <AppTabs />
+          <Stack screenOptions={{ headerShown: false }} />
         </SafeAreaProvider>
       </ThemeProvider>
     </GestureHandlerRootView>
