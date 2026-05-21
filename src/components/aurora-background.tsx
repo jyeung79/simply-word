@@ -116,6 +116,7 @@ function AuroraBlob({
     return height * (blob.baseY + blob.ay * Math.cos(t));
   });
 
+  // TODO: Profile BlurMask performance on lower-end Android devices.
   return (
     <Circle
       cx={cx}
