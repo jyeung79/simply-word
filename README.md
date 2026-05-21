@@ -1,62 +1,69 @@
-# Welcome to your Expo app 👋
+# Simply Word Bible Reading App 🕊️
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+A bible reading app focused on deep focus, immersion, and a distraction-free experience. The goal is to provide legible fonts, generous whitespacing, and natural typography so passages are easy to read and easy to move through. It's especially designed for people who generally struggle to read the bible — including those with ADHD or dyslexia.
 
-## Get started
+<img src="./assets/logo/simply-word-logo.png" alt="Simply Word Logo" width="256" height="256" />
 
-1. Install dependencies
+This repository is the monorepo for **Simply Word**, built with React Native and Expo.
 
-   ```bash
-   npm install
-   ```
+## Getting Started
 
-2. Start the app
+### Prerequisites
 
-   ```bash
-   npx expo start
-   ```
+- [Node.js](https://nodejs.org/) (LTS recommended)
+- [Expo CLI](https://docs.expo.dev/more/expo-cli/)
+- iOS Simulator (Xcode) or Android Emulator (Android Studio), or a physical device with [Expo Go](https://expo.dev/go)
 
-In the output, you'll find options to open the app in a
-
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
-
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
-
-## Get a fresh project
-
-When you're ready, run:
+### Installation
 
 ```bash
-npm run reset-project
+npm install
 ```
 
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
+### Running the app
 
-### Other setup steps
+```bash
+# Start the development server
+npm start
 
-- To set up ESLint for linting, run `npx expo lint`, or follow our guide on ["Using ESLint and Prettier"](https://docs.expo.dev/guides/using-eslint/)
-- If you'd like to set up unit testing, follow our guide on ["Unit Testing with Jest"](https://docs.expo.dev/develop/unit-testing/)
-- Learn more about the TypeScript setup in this template in our guide on ["Using TypeScript"](https://docs.expo.dev/guides/typescript/)
+# Run on iOS
+npm run ios
 
-## Learn more
+# Run on Android
+npm run android
 
-To learn more about developing your project with Expo, look at the following resources:
+# Run on web
+npm run web
+```
 
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
+## Tech Stack
 
-## Join the community
+- **[React Native](https://reactnative.dev/)** — cross-platform mobile framework
+- **[Expo](https://expo.dev/)** (SDK 55) — tooling and runtime for React Native
+- **[Expo Router](https://docs.expo.dev/router/introduction/)** — file-based routing
+- **[TypeScript](https://www.typescriptlang.org/)** — typed JavaScript
+- **[Tailwind CSS](https://tailwindcss.com/)** + **[Uniwind](https://github.com/uniwind/uniwind)** — utility-first styling for React Native
+- **[HeroUI Native](https://heroui.com/)** — UI component library
+- **[React Native Reanimated](https://docs.swmansion.com/react-native-reanimated/)** & **[Gesture Handler](https://docs.swmansion.com/react-native-gesture-handler/)** — animations and gestures
+- **[React Native Skia](https://shopify.github.io/react-native-skia/)** — 2D graphics rendering
+- **[Zustand](https://github.com/pmndrs/zustand)** — state management
+- **[TanStack Query](https://tanstack.com/query)** — server state and data fetching
+- **[Expo SQLite](https://docs.expo.dev/versions/latest/sdk/sqlite/)** — local database for bible content
+- **[ESLint](https://eslint.org/)** + **[Prettier](https://prettier.io/)** — linting and formatting
 
-Join our community of developers creating universal apps.
+## Project Structure
 
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+```
+ijn-app/
+├── app/              # Expo Router routes and screens
+├── src/              # Components, hooks, and utilities
+├── assets/           # Fonts, images, and static assets
+├── scripts/          # Helper scripts
+└── package.json
+```
 
 ## License
 
 Copyright (C) 2026 Jeffery Yeung
 
-This software is licensed under the GNU General Public License v3.0 or later](https://www.gnu.org/licenses/gpl-3.0.html).
+This software is licensed under the [GNU General Public License v3.0 or later](https://www.gnu.org/licenses/gpl-3.0.html).
